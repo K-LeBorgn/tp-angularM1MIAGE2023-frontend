@@ -1,0 +1,57 @@
+<!--<main *ngIf="!formVisible">-->
+<main>
+  <button mat-flat-button color="primary"
+          routerLink="/add"
+  >
+    Ajouter Assignment
+  </button>
+  <!--<button mat-flat-button color="primary"
+          (click)="peuplerBD()"
+  >
+    Peupler BD
+  </button>-->
+
+  <h3>Liste des devoirs :</h3>
+  <mat-list *ngFor="let a of assignments">
+    <nav>
+      <h3 mat-subheader>{{a.dateDeRendu | date}}</h3>
+      <mat-list-item (click)="assignmentClique(a)">
+      <p *ngIf="a.rendu" appRendu class="rendu">
+        {{ a.nom }}, à rendre le {{ a.dateDeRendu | date }} RENDU.
+      </p>
+      <p *ngIf="!a.rendu" appNonRendu>
+        {{ a.nom }}, à rendre le {{ a.dateDeRendu | date }} NON RENDU.
+      </p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </nav>
+  </mat-list>
+
+  <!--<div style="display: flex; justify-content: space-between; margin: 15px 0;">
+    <button mat-flat-button color="primary"
+            [disabled]="!hasPrevPage"
+            (click)="getAssignments(this.page - 1, this.limit)"
+    >
+      Previous Page
+    </button>
+
+    <button mat-flat-button color="primary"
+            [disabled]="!hasNextPage"
+            (click)="getAssignments(this.page + 1, this.limit)"
+    >
+      Next Page
+    </button>
+  </div>-->
+
+  <mat-paginator
+                (page)="handlePageEvent($event)"
+                [length]="totalDocs"
+                [pageSize]="limit"
+                [showFirstLastButtons]="true"
+                [pageSizeOptions]="[5, 10]"
+                [hidePageSize]="false"
+                [pageIndex]="page - 1"
+                aria-label="Select page"
+  >
+  </mat-paginator>
+</main>

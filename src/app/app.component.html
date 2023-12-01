@@ -1,0 +1,27 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <div class="navbarItems">
+      <h1 style="font-size: 24px;">Assignment APP</h1>
+      <mat-icon (click)="sideBarOpen=!sideBarOpen" aria-hidden="false" aria-label="Example menu icon">menu</mat-icon>
+      <mat-icon [routerLink]="['/']" aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+    </div>
+    <button *ngIf="!isLogged()" mat-button><mat-icon [routerLink]="['/login']" aria-hidden="false">login</mat-icon></button>
+    <button *ngIf="isLogged()"  mat-button (click)="logOut()"><mat-icon aria-hidden="false">logout</mat-icon></button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div id="app">
+  <mat-sidenav-container>
+    <mat-sidenav [opened]="sideBarOpen" mode="side">
+      <mat-list>
+        <mat-list-item [routerLink]="['/']">Home</mat-list-item>
+        <mat-list-item [routerLink]="['/login']">Login</mat-list-item>
+      </mat-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <h1 routerLink="/home">Application de gestion de devoirs</h1>
+      <!--<mat-slide-toggle color="accent">login</mat-slide-toggle>-->
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
